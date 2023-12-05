@@ -36,6 +36,8 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+                    SettingsWindow settings = new SettingsWindow();
             }
         });
         HighscoreButton.addActionListener(new ActionListener() {
