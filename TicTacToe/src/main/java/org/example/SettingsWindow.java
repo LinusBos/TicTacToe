@@ -1,20 +1,44 @@
 package org.example;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class SettingsWindow {
-    JFrame frame = new JFrame();
-    private JLabel title;
+public class SettingsWindow extends JPanel {
 
-    SettingsWindow(){
+    JFrame frame;
 
-        frame.setSize(400,400);
+    private JPanel settingsPanel;
+    private JLabel titlePanel;
+    private JComboBox player1ComboBox;
+    private JComboBox player2ComboBox;
+    private JButton colorButton;
+    private JLabel colorLabel;
+    private JLabel symbolLabel;
+    Container c;
+
+
+    SettingsWindow() {
+
+        frame = new JFrame();
+
+        frame.setContentPane(settingsPanel);
+        frame.setTitle("Game Settings");
+        frame.pack();
+        frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
-        frame.add(title);
+        colorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            ColorChooser color = new ColorChooser();
+            }
 
+        });
     }
+
 }
