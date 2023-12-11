@@ -15,10 +15,14 @@ public class MainForm extends JFrame {
     private JButton HighscoreButton;
     private JButton SettingsButton;
     private JButton GameRulesButton;
+    private SettingsWindow settingsWindow;
+    private TicTacToe ticTacToe;
 
     private JFrame jFrame;
 
-    public MainForm() {
+    public MainForm(SettingsWindow settingsWindow, TicTacToe ticTacToe) {
+        this.settingsWindow = settingsWindow;
+        this.ticTacToe = ticTacToe;
         jFrame = new JFrame();
         jFrame.setContentPane(MainPanel);
         jFrame.pack();
@@ -29,15 +33,15 @@ public class MainForm extends JFrame {
         NewGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ticTacToe.showWindow(true);
+
 
             }
         });
         SettingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-                    SettingsWindow settings = new SettingsWindow();
+                settingsWindow.showWindow(true);
             }
         });
         HighscoreButton.addActionListener(new ActionListener() {
