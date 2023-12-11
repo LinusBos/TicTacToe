@@ -8,24 +8,28 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class TicTacToe implements ActionListener {
-    Random random = new Random();
-    JFrame frame = new JFrame();
+    private Random random = new Random();
+    private JFrame frame = new JFrame();
 
-    JPanel scorePanel = new JPanel();
+    private JPanel scorePanel = new JPanel();
 
-    JLabel textField = new JLabel();
-    JPanel button_panel = new JPanel();
+    private JLabel textField = new JLabel();
+    private JPanel button_panel = new JPanel();
 
-    JButton[] buttons = new JButton[9];
+    private JButton[] buttons = new JButton[9];
 
-    boolean player_turn;
+    private boolean player_turn;
+    private Color buttonColor;
+    private String playerOneSymbol,playerTwoSymbol;
 
-    TicTacToe() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public TicTacToe(String playerOneSymbol, String playerTwoSymbol) {
+        this.playerOneSymbol = playerOneSymbol;
+        this.playerTwoSymbol = playerTwoSymbol;
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800,800);
         frame.getContentPane().setBackground(new Color(255,255,255));
         frame.setLayout(new BorderLayout());
-        frame.setVisible(true);
+        //frame.setVisible(true);
 
         textField.setBackground(new Color(25,25,25));
         textField.setForeground(new Color(25,255,0));
@@ -45,6 +49,7 @@ public class TicTacToe implements ActionListener {
         scorePanel.add(textField);
         frame.add(scorePanel,BorderLayout.NORTH);
         frame.add(button_panel);
+        frame.setLocationRelativeTo(null);
 
         firstPlayer();
     }
@@ -57,7 +62,8 @@ public class TicTacToe implements ActionListener {
                 if(player_turn) {
                     if(buttons[i].getText()=="") {
                         buttons[i].setForeground(new Color(255,0,0));
-                        buttons[i].setText("X");
+                        //buttons[i].setBackground();
+                        buttons[i].setText(playerOneSymbol);
                         player_turn=false;
                         textField.setText("O turn");
                         checkWinner();
@@ -66,7 +72,7 @@ public class TicTacToe implements ActionListener {
                 else {
                     if(buttons[i].getText()=="") {
                         buttons[i].setForeground(new Color(0,0,255));
-                        buttons[i].setText("O");
+                        buttons[i].setText(playerTwoSymbol);
                         player_turn=true;
                         textField.setText("X turn");
                         checkWinner();
@@ -85,6 +91,7 @@ public class TicTacToe implements ActionListener {
             buttons[i].setFont(new Font("Arial",Font.BOLD,120));
             buttons[i].setFocusable(false);
             buttons[i].addActionListener(this);
+            //buttons[i].setBackground();
         }
     }
     public void firstPlayer() {
@@ -242,5 +249,8 @@ public class TicTacToe implements ActionListener {
             buttons[i].setEnabled(false);
         }
         textField.setText("O wins");
+    }
+    public void showWindow(Boolean bool) {
+        frame.setVisible(bool);
     }
 }

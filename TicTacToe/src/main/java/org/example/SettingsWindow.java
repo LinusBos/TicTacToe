@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class SettingsWindow extends JPanel {
 
-    JFrame frame;
+    private JFrame frame;
 
     private JPanel settingsPanel;
     private JLabel titlePanel;
@@ -17,10 +17,15 @@ public class SettingsWindow extends JPanel {
     private JButton colorButton;
     private JLabel colorLabel;
     private JLabel symbolLabel;
+    private String playerOneSymbol, playerTwoSymbol;
+    private Color buttonColor;
     Container c;
 
 
-    SettingsWindow() {
+    public SettingsWindow() {
+        playerOneSymbol = "X";
+        playerTwoSymbol = "O";
+        buttonColor = new Color(0,0,255);
 
         frame = new JFrame();
 
@@ -30,7 +35,7 @@ public class SettingsWindow extends JPanel {
         frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        //frame.setVisible(true);
 
         colorButton.addActionListener(new ActionListener() {
             @Override
@@ -39,6 +44,32 @@ public class SettingsWindow extends JPanel {
             }
 
         });
+    }
+    public void showWindow(Boolean bool) {
+        frame.setVisible(bool);
+    }
+    public String getPlayerOneSymbol() {
+        return playerOneSymbol;
+    }
+
+    public void setPlayerOneSymbol(String playerOneSymbol) {
+        this.playerOneSymbol = playerOneSymbol;
+    }
+
+    public String getPlayerTwoSymbol() {
+        return playerTwoSymbol;
+    }
+
+    public void setPlayerTwoSymbol(String playerTwoSymbol) {
+        this.playerTwoSymbol = playerTwoSymbol;
+    }
+
+    public Color getButtonColor() {
+        return buttonColor;
+    }
+
+    public void setButtonColor(Color buttonColor) {
+        this.buttonColor = buttonColor;
     }
 
 }
