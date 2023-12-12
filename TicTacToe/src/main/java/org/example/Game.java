@@ -9,7 +9,7 @@ public class Game {
     public void menu() {
 
         SettingsWindow settingsWindow = new SettingsWindow();
-        TicTacToe ticTacToe = new TicTacToe(settingsWindow.getPlayerOneSymbol(),settingsWindow.getPlayerTwoSymbol());
+        TicTacToe ticTacToe = new TicTacToe(settingsWindow.getPlayerOneSymbol(),settingsWindow.getPlayerTwoSymbol(),settingsWindow.getButtonColor());
         //get name from newGameWindow
         Player playerOne = new Player("Martin", settingsWindow.getPlayerOneSymbol());
         //check if player from newGameWindow

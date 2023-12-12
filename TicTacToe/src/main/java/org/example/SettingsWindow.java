@@ -63,6 +63,7 @@ public class SettingsWindow extends JFrame {
                 System.out.println("Player Two Symbol: " + getPlayerTwoSymbol());
                 System.out.println("Button Color: " + getButtonColor());
 
+                TicTacToe.updateSettings(playerOneSymbol, playerTwoSymbol, buttonColor);
                 dispose();
             }
         });
