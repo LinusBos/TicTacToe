@@ -12,8 +12,8 @@ public class SettingsWindow extends JPanel {
 
     private JPanel settingsPanel;
     private JLabel titlePanel;
-    private JComboBox<String> player1ComboBox;
-    private JComboBox<String> player2ComboBox;
+    private JComboBox<String> playerOneComboBox;
+    private JComboBox<String> playerTwoComboBox;
     private JButton colorButton;
     private JLabel colorLabel;
     private JLabel symbolLabel;
@@ -45,16 +45,16 @@ public class SettingsWindow extends JPanel {
             }
 
         });
-        player1ComboBox.addActionListener(new ActionListener() {
+        playerOneComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                playerOneSymbol = (String) playerOneComboBox.getSelectedItem();
             }
         });
-        player2ComboBox.addActionListener(new ActionListener() {
+        playerTwoComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                playerTwoSymbol = (String) playerTwoComboBox.getSelectedItem();
             }
         });
         saveButton.addActionListener(new ActionListener() {
