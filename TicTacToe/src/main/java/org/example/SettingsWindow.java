@@ -12,14 +12,16 @@ public class SettingsWindow extends JPanel {
 
     private JPanel settingsPanel;
     private JLabel titlePanel;
-    private JComboBox player1ComboBox;
-    private JComboBox player2ComboBox;
+    private JComboBox<String> player1ComboBox;
+    private JComboBox<String> player2ComboBox;
     private JButton colorButton;
     private JLabel colorLabel;
     private JLabel symbolLabel;
+    private JLabel playerOneLabel;
+    private JLabel playerTwoLabel;
+    private JButton saveButton;
     private String playerOneSymbol, playerTwoSymbol;
     private Color buttonColor;
-    Container c;
 
 
     public SettingsWindow() {
@@ -35,7 +37,6 @@ public class SettingsWindow extends JPanel {
         frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
-        //frame.setVisible(true);
 
         colorButton.addActionListener(new ActionListener() {
             @Override
@@ -43,6 +44,24 @@ public class SettingsWindow extends JPanel {
             ColorChooser color = new ColorChooser();
             }
 
+        });
+        player1ComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        player2ComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
         });
     }
     public void showWindow(Boolean bool) {
