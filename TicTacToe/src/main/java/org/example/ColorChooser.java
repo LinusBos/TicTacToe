@@ -4,8 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ColorChooser extends JPanel {
-    Color initialcolor = Color.WHITE;
+    private Color initialColor = Color.WHITE;
+    private Color chosenColor;
 
-    Color color = JColorChooser.showDialog(null, "Select a color", initialcolor);
+    public ColorChooser() {
+        chosenColor = JColorChooser.showDialog(null, "Select a color", initialColor);
+
+    }
+
+    public Color getSelectedColor() {
+        return chosenColor;
+    }
+
 
 }
