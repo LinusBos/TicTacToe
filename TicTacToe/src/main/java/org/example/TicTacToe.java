@@ -16,15 +16,20 @@ public class TicTacToe implements ActionListener {
     private JLabel textField = new JLabel();
     private JPanel button_panel = new JPanel();
 
+
     private JButton[] buttons = new JButton[9];
 
-    private boolean player_turn;
+    private boolean playerOneTurn, playerTwoTurn;
     private Color buttonColor;
     private String playerOneSymbol,playerTwoSymbol;
+    Player playerOne;
+    Player playerTwo;
 
-    public TicTacToe(String playerOneSymbol, String playerTwoSymbol) {
-        this.playerOneSymbol = playerOneSymbol;
-        this.playerTwoSymbol = playerTwoSymbol;
+    public TicTacToe(Player playerOne, Player playerTwo) {
+        this.playerOneSymbol = playerOne.getSymbol();
+        this.playerTwoSymbol = playerTwo.getSymbol();
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800,800);
         frame.getContentPane().setBackground(new Color(255,255,255));
@@ -50,36 +55,63 @@ public class TicTacToe implements ActionListener {
         frame.add(scorePanel,BorderLayout.NORTH);
         frame.add(button_panel);
         frame.setLocationRelativeTo(null);
-
-        firstPlayer();
+        textField.setText(playerOneSymbol + " turn");
+        playerOneTurn = true;
+        //firstPlayer();
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int i=0;i<9;i++) {
-            if(e.getSource()==buttons[i]) {
-                if(player_turn) {
-                    if(buttons[i].getText()=="") {
-                        buttons[i].setForeground(new Color(255,0,0));
-                        //buttons[i].setBackground();
-                        buttons[i].setText(playerOneSymbol);
-                        player_turn=false;
-                        textField.setText("O turn");
-                        checkWinner();
+        // Check if player two is also a player and not a bot.
+        if(playerOne.getClass() ==  playerTwo.getClass()){
+            System.out.println("Now I'm here");
+            for(int i=0; i<9 ;i++) {
+                if(e.getSource()==buttons[i]) {
+                    if(playerOneTurn) {
+                        if(buttons[i].getText()=="") {
+                            buttons[i].setForeground(new Color(255,0,0));
+                            //buttons[i].setBackground();
+                            buttons[i].setText(playerOneSymbol);
+                            playerOneTurn = false;
+                            playerTwoTurn = true;
+                            textField.setText(playerTwoSymbol + " turn");
+                            checkWinner();
+                        }
+                    }
+                    else { //Player two pressed
+                        if(buttons[i].getText()=="") {
+                            buttons[i].setForeground(new Color(0,0,255));
+                            buttons[i].setText(playerTwoSymbol);
+                            playerTwoTurn = false;
+                            playerOneTurn = true;
+                            textField.setText(playerOneSymbol + " turn");
+                            checkWinner();
+                        }
                     }
                 }
-                else {
-                    if(buttons[i].getText()=="") {
-                        buttons[i].setForeground(new Color(0,0,255));
-                        buttons[i].setText(playerTwoSymbol);
-                        player_turn=true;
-                        textField.setText("X turn");
+            }
+        } else { // If playerTwo is a bot
+            System.out.println("Helloooo vs bot");
+            for (int i=0; i<9; i++) {
+                if (e.getSource()==buttons[i]) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setForeground(new Color(255, 0, 0));
+                        //buttons[i].setBackground();
+                        buttons[i].setText(playerOneSymbol);
+                        textField.setText(playerTwoSymbol + " turn");
                         checkWinner();
                     }
                 }
             }
+            int index = playerTwo.makeMove(buttons);
+            buttons[index].setForeground(new Color(0, 0, 255));
+            //buttons[i].setBackground();
+            buttons[index].setText(playerTwoSymbol);
+            textField.setText(playerOneSymbol + " turn");
+            checkWinner(); // TODO This can bug if player one wins and after bot will place and can also win.
         }
+
     }
 
 
@@ -94,7 +126,9 @@ public class TicTacToe implements ActionListener {
             //buttons[i].setBackground();
         }
     }
+   /*
     public void firstPlayer() {
+
         //random selects who starts
         try {
             Thread.sleep(2000);
@@ -110,6 +144,7 @@ public class TicTacToe implements ActionListener {
             textField.setText("O turn");
         }
     }
+    */
 
     public void checkWinner() {
         if(
@@ -253,4 +288,8 @@ public class TicTacToe implements ActionListener {
     public void showWindow(Boolean bool) {
         frame.setVisible(bool);
     }
+    public JButton[] getButtons() {
+        return buttons;
+    }
+
 }

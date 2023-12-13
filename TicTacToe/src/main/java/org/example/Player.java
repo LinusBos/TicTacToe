@@ -1,5 +1,7 @@
 package org.example;
 
+import javax.swing.*;
+
 public class Player {
     private String name;
     private String symbol;
@@ -23,8 +25,8 @@ public class Player {
         this.name = name;
     }
 
-    public void makeMove() {
-
+    public int makeMove(JButton[] jButtonList) {
+        return 0;
     }
 
 }
