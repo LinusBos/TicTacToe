@@ -22,8 +22,9 @@ public class TicTacToe implements ActionListener {
     private boolean playerOneTurn, playerTwoTurn;
     private Color buttonColor;
     private String playerOneSymbol,playerTwoSymbol;
-    Player playerOne;
-    Player playerTwo;
+    private Player playerOne;
+    private Player playerTwo;
+    private int score;
 
     public TicTacToe(Player playerOne, Player playerTwo) {
         this.playerOneSymbol = playerOne.getSymbol();
@@ -65,7 +66,6 @@ public class TicTacToe implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Check if player two is also a player and not a bot.
         if(playerOne.getClass() ==  playerTwo.getClass()){
-            System.out.println("Now I'm here");
             for(int i=0; i<9 ;i++) {
                 if(e.getSource()==buttons[i]) {
                     if(playerOneTurn) {
@@ -92,7 +92,7 @@ public class TicTacToe implements ActionListener {
                 }
             }
         } else { // If playerTwo is a bot
-            System.out.println("Helloooo vs bot");
+
             for (int i=0; i<9; i++) {
                 if (e.getSource()==buttons[i]) {
                     if (buttons[i].getText() == "") {

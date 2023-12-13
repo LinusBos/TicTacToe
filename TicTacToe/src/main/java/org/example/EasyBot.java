@@ -14,7 +14,6 @@ public class EasyBot extends Player {
         int chosenIndex = 0;
         boolean emptyButtonFound = false;
         while (!emptyButtonFound) {
-            System.out.println(randomIndex);
             if (buttonsList[randomIndex].getText().isEmpty()) {
                 chosenIndex = randomIndex;
                 emptyButtonFound = true;
