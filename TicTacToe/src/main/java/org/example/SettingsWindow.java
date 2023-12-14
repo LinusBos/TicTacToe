@@ -37,10 +37,10 @@ public class SettingsWindow extends JFrame {
         colorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            ColorChooser colorChooser = new ColorChooser();
-            Color selectedColor = colorChooser.getSelectedColor();
+                ColorChooser colorChooser = new ColorChooser();
+                Color selectedColor = colorChooser.getSelectedColor();
 
-            setButtonColor(selectedColor);
+                setButtonColor(selectedColor);
             }
 
         });

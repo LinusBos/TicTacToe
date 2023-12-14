@@ -28,7 +28,7 @@ public class TicTacToe implements ActionListener {
     public TicTacToe(Player playerOne, Player playerTwo, Color buttonColor) {
         this.playerOneSymbol = playerOne.getSymbol();
         this.playerTwoSymbol = playerTwo.getSymbol();
-        this.playerOne = playerTwo;
+        this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.buttonColor = buttonColor;
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -101,13 +101,13 @@ public class TicTacToe implements ActionListener {
                     }
                 }
             }
-                int index = playerTwo.makeMove(buttons);
-                System.out.println("Index: " + index);
-                    buttons[index].setForeground(new Color(0, 0, 255));
-                    //buttons[i].setBackground();
-                    buttons[index].setText(playerTwoSymbol);
-                    textField.setText(playerOneSymbol + " turn");
-                    checkWinner(); // TODO This can bug if player one wins and after bot will place and can also win.
+            int index = playerTwo.makeMove(buttons);
+
+            buttons[index].setForeground(new Color(0, 0, 255));
+            //buttons[i].setBackground();
+            buttons[index].setText(playerTwoSymbol);
+            textField.setText(playerOneSymbol + " turn");
+            checkWinner(); // TODO This can bug if player one wins and after bot will place and can also win.
         }
 
     }
@@ -125,7 +125,7 @@ public class TicTacToe implements ActionListener {
             buttons[i].setBackground(buttonColor);
         }
     }
-
+/*
     public void firstPlayer() {
         //random selects who starts
         try {
@@ -141,7 +141,7 @@ public class TicTacToe implements ActionListener {
             textField.setText(playerTwoSymbol + " turn");
         }
     }
-
+*/
     public void checkWinner() {
         if (
                 (buttons[0].getText() == playerOneSymbol) &&
@@ -267,7 +267,7 @@ public class TicTacToe implements ActionListener {
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        textField.setText(playerOneSymbol + " wins");
+        textField.setText(playerOne.getName() + " wins");
     }
 
     public void oWins(int a, int b, int c) {
@@ -278,7 +278,7 @@ public class TicTacToe implements ActionListener {
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
-        textField.setText(playerTwoSymbol + " wins");
+        textField.setText(playerOne.getName() + " wins");
     }
 
     public void showWindow(Boolean bool) {
