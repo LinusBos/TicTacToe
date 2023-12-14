@@ -13,14 +13,13 @@ public class Game {
         //get name from newGameWindow
         Player playerOne = new Player("Martin", settingsWindow.getPlayerOneSymbol());
         //check if player from newGameWindow
-        EasyBot playerTwo = new EasyBot("Diana", settingsWindow.getPlayerTwoSymbol());
-
-
-        TicTacToe ticTacToe = new TicTacToe(playerOne, playerTwo);
+        Player playerTwo = new Player("Diana", settingsWindow.getPlayerTwoSymbol());
+        // TicTacToe ticTacToe = new TicTacToe(playerOne, playerTwo);
+        NewGame newGame = new NewGame(settingsWindow);
         // check else-if easyBot
         // check else-if mediumBot
         // check else-if hardBot
-        MainForm mainForm = new MainForm(settingsWindow, ticTacToe);
+        MainForm mainForm = new MainForm(settingsWindow, newGame);
     }
 
 

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.Random;
 
 public class EasyBot extends Player {
+
     private Random random = new Random();
     public EasyBot(String name, String symbol) {
         super(name, symbol);

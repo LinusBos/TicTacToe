@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.Random;
 
 public class MediumBot extends Player {
+
     private Random random = new Random();
     public MediumBot(String name, String symbol) {
         super(name, symbol);
