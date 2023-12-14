@@ -105,6 +105,7 @@ public class TicTacToe implements ActionListener {
                 }
             }
             int index = playerTwo.makeMove(buttons);
+            System.out.println("Index: " + index);
             buttons[index].setForeground(new Color(0, 0, 255));
             //buttons[i].setBackground();
             buttons[index].setText(playerTwoSymbol);
