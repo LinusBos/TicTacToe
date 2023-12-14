@@ -59,11 +59,7 @@ public class SettingsWindow extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Player One Symbol: " + getPlayerOneSymbol());
-                System.out.println("Player Two Symbol: " + getPlayerTwoSymbol());
-                System.out.println("Button Color: " + getButtonColor());
 
-                TicTacToe.updateSettings(playerOneSymbol, playerTwoSymbol, buttonColor);
                 dispose();
             }
         });

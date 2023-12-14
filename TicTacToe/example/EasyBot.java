@@ -1,7 +1,7 @@
 package org.example;
 
-public class MediumBot extends Player {
-    public MediumBot(String name, String symbol) {
+public class EasyBot extends Player {
+    public EasyBot(String name,String symbol) {
         super(name, symbol);
     }
     @Override

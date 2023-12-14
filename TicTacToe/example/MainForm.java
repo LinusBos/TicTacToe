@@ -16,13 +16,21 @@ public class MainForm extends JFrame {
     private JButton SettingsButton;
     private JButton GameRulesButton;
     private SettingsWindow settingsWindow;
-    private TicTacToe ticTacToe;
+   // private TicTacToe ticTacToe;
+
+    private NewGame newGame;
 
     private JFrame jFrame;
 
-    public MainForm(SettingsWindow settingsWindow, TicTacToe ticTacToe) {
+    private void openNewGame() {
+        newGame.showWindow(true);
+        jFrame.dispose();
+    }
+
+    public MainForm(SettingsWindow settingsWindow, NewGame newGame) {
         this.settingsWindow = settingsWindow;
-        this.ticTacToe = ticTacToe;
+       // this.ticTacToe = ticTacToe;
+        this.newGame = newGame;
         jFrame = new JFrame();
         jFrame.setContentPane(MainPanel);
         jFrame.pack();
@@ -30,12 +38,12 @@ public class MainForm extends JFrame {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
+
+
         NewGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ticTacToe.showWindow(true);
-
-
+               openNewGame();
             }
         });
         SettingsButton.addActionListener(new ActionListener() {

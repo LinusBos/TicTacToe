@@ -16,7 +16,7 @@
           <text value="New Game"/>
         </properties>
       </component>
-      <component id="656f" class="javax.swing.JTextField" binding="Player2">
+      <component id="656f" class="javax.swing.JTextField" binding="playerNameFieldTwo">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -69,7 +69,7 @@
           <text value="Player 2"/>
         </properties>
       </component>
-      <component id="10714" class="javax.swing.JTextField" binding="Player1">
+      <component id="10714" class="javax.swing.JTextField" binding="playerNameFieldOne">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
