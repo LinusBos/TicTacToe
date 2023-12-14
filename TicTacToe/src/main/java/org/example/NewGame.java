@@ -85,7 +85,6 @@ public class NewGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedDifficulty = (String) botDifficultyJCB.getSelectedItem();
-                System.out.println(selectedDifficulty);
                 bot = handleComboBoxSelection(selectedDifficulty);
                 botChecked = true;
             }
