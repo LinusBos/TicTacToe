@@ -75,7 +75,12 @@ public class NewGame extends JFrame {
                     return;
                 }else {
                     playerOne = new Player(playerNameFieldOne.getText(), settingsWindow.getPlayerOneSymbol());
-                    playerTwo = new Player(playerNameFieldOne.getText(), settingsWindow.getPlayerTwoSymbol());
+                    if (botChecked) {
+                        bot.setName(playerTwoName);
+                    } else {
+                        playerTwo = new Player(playerNameFieldOne.getText(), settingsWindow.getPlayerTwoSymbol());
+                    }
+
                 }
                 openTicTacToe();
             }
