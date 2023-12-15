@@ -372,7 +372,7 @@ public class TicTacToe implements ActionListener {
         playerTwoTurn = false;
 
         textField.setText(playerOne.getName() + " turn");
-        resetGame();
+
     }
 
     /*
