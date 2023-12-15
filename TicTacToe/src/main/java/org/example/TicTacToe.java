@@ -21,7 +21,7 @@ public class TicTacToe implements ActionListener {
     private static Color buttonColor;
     private static String playerOneSymbol;
     private static String playerTwoSymbol;
-
+    
     private Player playerOne;
     private Player playerTwo;
 
@@ -370,7 +370,6 @@ public class TicTacToe implements ActionListener {
         playerTwoTurn = false;
 
         textField.setText(playerOne.getName() + " turn");
-        resetGame();
     }
 
     /*
