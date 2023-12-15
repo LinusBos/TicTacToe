@@ -12,8 +12,6 @@ public class HardBot extends Player {
     @Override
     public int makeMove(JButton[] buttonsList) {
 
-        // TODO Check if opponent have two in row, if so intercept, if not use mediumbotmove.
-        // TODO Tänk om 0...2 hindra då mellan.
         for (int i = 0; i < 9; i++) {
             if (!buttonsList[i].getText().isEmpty() && !buttonsList[i].getText().equals(getSymbol())) {
                 // found opponent symbol
