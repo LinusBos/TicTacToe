@@ -26,12 +26,13 @@ public class NewGame extends JFrame {
 
 
     private void openTicTacToe() {
+        botChecked = BotPlayer.isSelected();
         if(botChecked) {
-            TicTacToe ticTacToe = new TicTacToe(playerOne, bot, settingsWindow.getButtonColor());
+            TicTacToe ticTacToe = new TicTacToe(playerOne, bot, settingsWindow.getButtonColor(), settingsWindow.getPlayerOneColor(), settingsWindow.getPlayerTwoColor());
             ticTacToe.showWindow(true);
             jFrame.dispose();
         } else {
-            TicTacToe ticTacToe = new TicTacToe(playerOne, playerTwo, settingsWindow.getButtonColor());
+            TicTacToe ticTacToe = new TicTacToe(playerOne, playerTwo, settingsWindow.getButtonColor(), settingsWindow.getPlayerOneColor(), settingsWindow.getPlayerTwoColor());
             ticTacToe.showWindow(true);
             jFrame.dispose();
         }
@@ -48,7 +49,7 @@ public class NewGame extends JFrame {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-
+        BotPlayer.setSelected(false);
         botDifficultyJCB.setEnabled(false);
 
 
@@ -73,9 +74,15 @@ public class NewGame extends JFrame {
                 if (playerOneName.isEmpty() || playerTwoName.isEmpty()) {
                     JOptionPane.showMessageDialog(jFrame, "Please enter names for both players.");
                     return;
-                }else {
+                } else {
                     playerOne = new Player(playerNameFieldOne.getText(), settingsWindow.getPlayerOneSymbol());
-                    playerTwo = new Player(playerNameFieldOne.getText(), settingsWindow.getPlayerTwoSymbol());
+                    if (BotPlayer.isSelected()) {
+                        String selectedDifficulty = (String) botDifficultyJCB.getSelectedItem();
+                        bot = handleComboBoxSelection(selectedDifficulty);
+                        botChecked = true;
+                    } else {
+                        playerTwo = new Player(playerNameFieldTwo.getText(), settingsWindow.getPlayerTwoSymbol());
+                    }
                 }
                 openTicTacToe();
             }
@@ -85,6 +92,7 @@ public class NewGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedDifficulty = (String) botDifficultyJCB.getSelectedItem();
+                System.out.println(selectedDifficulty);
                 bot = handleComboBoxSelection(selectedDifficulty);
                 botChecked = true;
             }

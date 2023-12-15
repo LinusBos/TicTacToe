@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class SettingsWindow extends JFrame {
 
+    private JFrame jFrame;
     private JPanel settingsPanel;
     private JLabel titlePanel;
     private JComboBox<String> playerOneComboBox;
@@ -18,14 +19,18 @@ public class SettingsWindow extends JFrame {
     private JLabel playerOneLabel;
     private JLabel playerTwoLabel;
     private JButton saveButton;
+    private JButton playerOneColorButton;
+    private JButton colorTwoPlayerButton;
     private String playerOneSymbol, playerTwoSymbol;
-    private Color buttonColor;
+    private Color buttonColor, playerOneColor, playerTwoColor;
 
 
     public SettingsWindow() {
         playerOneSymbol = "X";
         playerTwoSymbol = "O";
-        buttonColor = new Color(0,0,255);
+        buttonColor = new Color(173, 216, 230);
+        playerOneColor = new Color(255, 0, 0);
+        playerTwoColor = new Color(0, 0, 255);
 
         this.setContentPane(settingsPanel);
         this.setTitle("Game Settings");
@@ -56,17 +61,45 @@ public class SettingsWindow extends JFrame {
                 playerTwoSymbol = (String) playerTwoComboBox.getSelectedItem();
             }
         });
+        playerOneColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ColorChooser colorChooser = new ColorChooser();
+                Color selectedColor = colorChooser.getSelectedColor();
+
+                setPlayerOneColor(selectedColor);
+            }
+        });
+        colorTwoPlayerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ColorChooser colorChooser = new ColorChooser();
+                Color selectedColor = colorChooser.getSelectedColor();
+
+                setPlayerTwoColor(selectedColor);
+            }
+        });
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                dispose();
+                if (playerOneSymbol.equals(playerTwoSymbol)) {
+                    JOptionPane.showMessageDialog(jFrame, "Please choose different symbols for Player 1 and Player 2.");
+                    return;
+                } else if(playerOneColor.equals(buttonColor) || playerTwoColor.equals(buttonColor)) {
+                    JOptionPane.showMessageDialog(jFrame, "Please choose different colors for symbols and background.");
+                    return;
+                } else {
+                    dispose();
+                }
             }
         });
+
     }
+
     public void showWindow(Boolean bool) {
         this.setVisible(bool);
     }
+
     public String getPlayerOneSymbol() {
         return playerOneSymbol;
     }
@@ -91,4 +124,19 @@ public class SettingsWindow extends JFrame {
         this.buttonColor = buttonColor;
     }
 
+    public Color getPlayerOneColor() {
+        return playerOneColor;
+    }
+
+    public void setPlayerOneColor(Color playerOneColor) {
+        this.playerOneColor = playerOneColor;
+    }
+
+    public Color getPlayerTwoColor() {
+        return playerTwoColor;
+    }
+
+    public void setPlayerTwoColor(Color playerTwoColor) {
+        this.playerTwoColor = playerTwoColor;
+    }
 }
