@@ -295,7 +295,7 @@ public class TicTacToe implements ActionListener {
         disableButtons();
         textField.setText(playerOne.getName() + " wins");
 
-        int option = JOptionPane.showConfirmDialog(frame, "Player One wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(frame,  playerOne.getName() + " wins!", "Game Over", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             resetGame();
         } else {
@@ -308,7 +308,7 @@ public class TicTacToe implements ActionListener {
         disableButtons();
             textField.setText(playerTwo.getName() + " wins");
 
-            int option = JOptionPane.showConfirmDialog(frame, "Player Two wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+            int option = JOptionPane.showConfirmDialog(frame, playerTwo.getName()+" wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
             if (option == JOptionPane.YES_OPTION) {
                 resetGame();
             } else {
