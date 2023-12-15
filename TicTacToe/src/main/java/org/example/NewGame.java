@@ -52,13 +52,6 @@ public class NewGame extends JFrame {
         BotPlayer.setSelected(false);
         botDifficultyJCB.setEnabled(false);
 
-
-// TODO när jag tyrcker start game, ska player one skapas Player playerOne = new Player...; Symbolen ska komma från settingswindow.
-        // hämta färgen från settingswindow eller tictactoefönstret
-        // Om spelare två är satt som bot ska den göra samma sak men motsvara botten som är ifylld.
-        // sedan göra en ny tictactoe och skicka med allt.
-        // Hämta settingsWindow constructor, sedan
-
         BotPlayer.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -83,6 +76,7 @@ public class NewGame extends JFrame {
                     } else {
                         playerTwo = new Player(playerNameFieldTwo.getText(), settingsWindow.getPlayerTwoSymbol());
                     }
+
                 }
                 openTicTacToe();
             }
@@ -92,7 +86,7 @@ public class NewGame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedDifficulty = (String) botDifficultyJCB.getSelectedItem();
-                System.out.println(selectedDifficulty);
+                //System.out.println(selectedDifficulty);
                 bot = handleComboBoxSelection(selectedDifficulty);
                 botChecked = true;
             }
@@ -102,6 +96,11 @@ public class NewGame extends JFrame {
 
     }
 
+    /**
+     *
+     * @param selectedDifficulty that decides what difficulty the Bot will be.
+     * @return one of the bot objects that is a subclass of Player.
+     */
     private Player handleComboBoxSelection(String selectedDifficulty) {
         switch (selectedDifficulty) {
             case "Easy":
