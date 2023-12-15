@@ -18,18 +18,20 @@ public class TicTacToe implements ActionListener {
     private static JButton[] buttons = new JButton[9];
 
     private boolean playerOneTurn, playerTwoTurn;
-    private static Color buttonColor;
+    private Color buttonColor, playerOneColor, playerTwoColor;
     private static String playerOneSymbol;
     private static String playerTwoSymbol;
     private Player playerOne;
     private Player playerTwo;
 
-    public TicTacToe(Player playerOne, Player playerTwo, Color buttonColor) {
+    public TicTacToe(Player playerOne, Player playerTwo, Color buttonColor, Color playerOneColor, Color playerTwoColor) {
         this.playerOneSymbol = playerOne.getSymbol();
         this.playerTwoSymbol = playerTwo.getSymbol();
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.buttonColor = buttonColor;
+        this.playerOneColor = playerOneColor;
+        this.playerTwoColor = playerTwoColor;
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 800);
         frame.getContentPane().setBackground(new Color(255, 255, 255));
@@ -68,7 +70,7 @@ public class TicTacToe implements ActionListener {
                 if (e.getSource() == buttons[i]) {
                     if (playerOneTurn) {
                         if (buttons[i].getText() == "") {
-                            buttons[i].setForeground(new Color(255, 0, 0));
+                            buttons[i].setForeground(playerOneColor);
                             //buttons[i].setBackground();
                             buttons[i].setText(playerOneSymbol);
                             playerOneTurn = false;
@@ -80,7 +82,7 @@ public class TicTacToe implements ActionListener {
                         }
                     } else { //Player two pressed
                         if (buttons[i].getText() == "") {
-                            buttons[i].setForeground(new Color(0, 0, 255));
+                            buttons[i].setForeground(playerTwoColor);
                             buttons[i].setText(playerTwoSymbol);
                             playerTwoTurn = false;
                             playerOneTurn = true;
@@ -96,7 +98,7 @@ public class TicTacToe implements ActionListener {
             for (int i=0; i<9; i++) {
                 if (e.getSource()==buttons[i]) {
                     if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(new Color(255, 0, 0));
+                        buttons[i].setForeground(playerOneColor);
                         //buttons[i].setBackground();
                         buttons[i].setText(playerOneSymbol);
                         textField.setText(playerTwoSymbol + " turn");
@@ -107,7 +109,7 @@ public class TicTacToe implements ActionListener {
             }
             int index = playerTwo.makeMove(buttons);
 
-            buttons[index].setForeground(new Color(0, 0, 255));
+            buttons[index].setForeground(playerTwoColor);
             //buttons[i].setBackground();
             buttons[index].setText(playerTwoSymbol);
             textField.setText(playerOneSymbol + " turn");
