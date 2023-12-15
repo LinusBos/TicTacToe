@@ -263,8 +263,32 @@ public class TicTacToe implements ActionListener {
         ) {
             oWins(2, 4, 6);
 
+
+        }
+        boolean draw = true;
+        for (int i = 0; i < 9; i++) {
+            if (buttons[i].getText().equals("")) {
+                draw = false;
+                break;
+            }
+        }
+
+        if (draw) {
+            handleDraw();
         }
     }
+
+    public void handleDraw() {
+        textField.setText("It's a draw!");
+
+        int option = JOptionPane.showConfirmDialog(frame, "It's a draw! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            resetGame();
+        } else {
+            frame.dispose();
+        }
+    }
+
 
     public void xWins(int a, int b, int c) {
         setWinningBackground(a, b, c);
