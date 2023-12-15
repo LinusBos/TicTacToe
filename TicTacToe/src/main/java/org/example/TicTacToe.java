@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class TicTacToe implements ActionListener {
-    private Random random = new Random();
+
     private JFrame frame = new JFrame();
 
     private JPanel scorePanel = new JPanel();
@@ -17,7 +17,7 @@ public class TicTacToe implements ActionListener {
 
     private static JButton[] buttons = new JButton[9];
 
-    private boolean playerOneTurn, playerTwoTurn;
+    private boolean playerOneTurn, playerTwoTurn, gameOver;
     private Color buttonColor, playerOneColor, playerTwoColor;
     private static String playerOneSymbol;
     private static String playerTwoSymbol;
@@ -36,7 +36,7 @@ public class TicTacToe implements ActionListener {
         frame.setSize(800, 800);
         frame.getContentPane().setBackground(new Color(255, 255, 255));
         frame.setLayout(new BorderLayout());
-        //frame.setVisible(true);
+
 
         textField.setBackground(new Color(25, 25, 25));
         textField.setForeground(new Color(25, 255, 0));
@@ -57,8 +57,11 @@ public class TicTacToe implements ActionListener {
         frame.add(scorePanel, BorderLayout.NORTH);
         frame.add(button_panel);
         frame.setLocationRelativeTo(null);
+        playerOneTurn = true;
+        playerTwoTurn = false;
+        gameOver = false;
 
-        //firstPlayer();
+
     }
 
 
@@ -68,25 +71,24 @@ public class TicTacToe implements ActionListener {
         if(playerOne.getClass() ==  playerTwo.getClass()) {
             for (int i = 0; i < 9; i++) {
                 if (e.getSource() == buttons[i]) {
-                    if (playerOneTurn) {
+                    if (playerOneTurn && !gameOver) {
                         if (buttons[i].getText() == "") {
                             buttons[i].setForeground(playerOneColor);
-                            //buttons[i].setBackground();
                             buttons[i].setText(playerOneSymbol);
                             playerOneTurn = false;
                             playerTwoTurn = true;
-                            textField.setText(playerTwoSymbol + " turn");
+                            textField.setText(playerTwo.getName() + " turn");
                             checkWinner();
 
 
                         }
-                    } else { //Player two pressed
+                    } else if (playerTwoTurn && !gameOver){ //Player two pressed
                         if (buttons[i].getText() == "") {
                             buttons[i].setForeground(playerTwoColor);
                             buttons[i].setText(playerTwoSymbol);
                             playerTwoTurn = false;
                             playerOneTurn = true;
-                            textField.setText(playerOneSymbol + " turn");
+                            textField.setText(playerOne.getName() + " turn");
                             checkWinner();
 
 
@@ -97,23 +99,28 @@ public class TicTacToe implements ActionListener {
         }else { // If playerTwo is a bot
             for (int i=0; i<9; i++) {
                 if (e.getSource()==buttons[i]) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(playerOneColor);
-                        //buttons[i].setBackground();
-                        buttons[i].setText(playerOneSymbol);
-                        textField.setText(playerTwoSymbol + " turn");
-                        checkWinner();
-
+                    if (playerOneTurn){
+                        if (buttons[i].getText() == "") {
+                            buttons[i].setForeground(playerOneColor);
+                            buttons[i].setText(playerOneSymbol);
+                            playerOneTurn = false;
+                            playerTwoTurn = true;
+                            textField.setText(playerTwo.getName() + " turn");
+                            checkWinner();
+                        }
                     }
+
                 }
             }
-            int index = playerTwo.makeMove(buttons);
-
-            buttons[index].setForeground(playerTwoColor);
-            //buttons[i].setBackground();
-            buttons[index].setText(playerTwoSymbol);
-            textField.setText(playerOneSymbol + " turn");
-            checkWinner(); // TODO This can bug if player one wins and after bot will place and can also win.
+            if (playerTwoTurn && !gameOver) {
+                int index = playerTwo.makeMove(buttons);
+                buttons[index].setForeground(playerTwoColor);
+                buttons[index].setText(playerTwoSymbol);
+                playerOneTurn = true;
+                playerTwoTurn = false;
+                textField.setText(playerOne.getName() + " turn");
+                checkWinner();
+            }
 
         }
 
@@ -132,24 +139,8 @@ public class TicTacToe implements ActionListener {
             buttons[i].setBackground(buttonColor);
         }
     }
-/*
-    public void firstPlayer() {
-        //random selects who starts
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (random.nextInt(2) == 0) {
-            player_turn = true;
-            textField.setText(playerOneSymbol + " turn");
-        } else {
-            player_turn = false;
-            textField.setText(playerTwoSymbol + " turn");
-        }
-    }
-*/
-    public void checkWinner() {
+
+    private void checkWinner() {
         if (
                 (buttons[0].getText() == playerOneSymbol) &&
                         (buttons[1].getText() == playerOneSymbol) &&
@@ -263,23 +254,24 @@ public class TicTacToe implements ActionListener {
                         (buttons[6].getText() == playerTwoSymbol)
         ) {
             oWins(2, 4, 6);
-
-
         }
-        boolean draw = true;
-        for (int i = 0; i < 9; i++) {
-            if (buttons[i].getText().equals("")) {
-                draw = false;
-                break;
+        if(!gameOver) {
+            boolean draw = true;
+            for (int i = 0; i < 9; i++) {
+                if (buttons[i].getText().equals("")) {
+                    draw = false;
+                    break;
+                }
+            }
+
+            if (draw) {
+                handleDraw();
             }
         }
 
-        if (draw) {
-            handleDraw();
-        }
     }
 
-    public void handleDraw() {
+    private void handleDraw() {
         textField.setText("It's a draw!");
 
         int option = JOptionPane.showConfirmDialog(frame, "It's a draw! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
@@ -290,13 +282,19 @@ public class TicTacToe implements ActionListener {
         }
     }
 
-
-    public void xWins(int a, int b, int c) {
+    /**
+     *
+     * @param a coordinate that x has to win
+     * @param b coordinate that x has to win
+     * @param c coordinate that x has to win
+     */
+    private void xWins(int a, int b, int c) {
+        gameOver = true;
         setWinningBackground(a, b, c);
         disableButtons();
         textField.setText(playerOne.getName() + " wins");
 
-        int option = JOptionPane.showConfirmDialog(frame,  playerOne.getName() + " wins!", "Game Over", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(frame,  playerOne.getName() + " wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             resetGame();
         } else {
@@ -304,7 +302,13 @@ public class TicTacToe implements ActionListener {
         }
     }
 
-    public void oWins(int a, int b, int c) {
+    /**
+     * @param a coordinate that o has to win.
+     * @param b coordinate that o has to win.
+     * @param c coordinate that o has to win.
+     */
+    private void oWins(int a, int b, int c) {
+        gameOver = true;
         setWinningBackground(a, b, c);
         disableButtons();
             textField.setText(playerTwo.getName() + " wins");
@@ -317,6 +321,11 @@ public class TicTacToe implements ActionListener {
         }
     }
 
+    /**
+     * @param a coordinate that should be changed.
+     * @param b coordinate that should be changed.
+     * @param c coordinate that should be changed.
+     */
     private void setWinningBackground(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
@@ -329,37 +338,15 @@ public class TicTacToe implements ActionListener {
         }
     }
 
-
-   /* public void xWins(int a, int b, int c) {
-        buttons[a].setBackground(Color.GREEN);
-        buttons[b].setBackground(Color.GREEN);
-        buttons[c].setBackground(Color.GREEN);
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setEnabled(false);
-        }
-        textField.setText(playerOne.getName() + " wins");
-    }
-
-    public void oWins(int a, int b, int c) {
-        buttons[a].setBackground(Color.GREEN);
-        buttons[b].setBackground(Color.GREEN);
-        buttons[c].setBackground(Color.GREEN);
-
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setEnabled(false);
-        }
-        textField.setText(playerOne.getName() + " wins");
-
-    }
-*/
-
+    /**
+     *
+     * @param bool true shows window.
+     */
     public void showWindow(Boolean bool) {
         frame.setVisible(bool);
     }
 
-    public void resetGame() {
+    private void resetGame() {
         for (int i = 0; i < 9; i++) {
             buttons[i].setText("");
             buttons[i].setEnabled(true);
@@ -369,20 +356,9 @@ public class TicTacToe implements ActionListener {
 
         playerOneTurn = true;
         playerTwoTurn = false;
+        gameOver = false;
 
         textField.setText(playerOne.getName() + " turn");
     }
 
-    /*
-    public static void updateSettings(String playerOneSymbol, String playerTwoSymbol, Color buttonColor) {
-
-            TicTacToe.playerOneSymbol = playerOneSymbol;
-            TicTacToe.playerTwoSymbol = playerTwoSymbol;
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setBackground(buttonColor);
-
-        }
-
-    }*/
 }

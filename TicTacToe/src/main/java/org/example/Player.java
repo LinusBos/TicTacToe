@@ -25,6 +25,11 @@ public class Player {
         this.name = name;
     }
 
+    /**
+     *
+     * @param jButtonList a list of the buttons in the game.
+     * @return an index that next symbol should be placed at.
+     */
     public int makeMove(JButton[] jButtonList) {
         return 0;
     }

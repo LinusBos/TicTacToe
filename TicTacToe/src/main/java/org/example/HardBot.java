@@ -105,9 +105,14 @@ public class HardBot extends Player {
         return mediumBotMakeMove(buttonsList);
     }
 
+    /**
+     *
+     * @param buttonsList a list of the buttons in the game.
+     * @return an index that next symbol should be placed at.
+     */
     private int mediumBotMakeMove(JButton[] buttonsList) {
+        // Same method as MediumBot.makeMove()
         int chosenIndex = 0;
-
         for (int i = 0; i<9; i++) {
             if (buttonsList[i].getText().equals(getSymbol())) {
                 // if i = (0,2,4,6,8) check diagonals

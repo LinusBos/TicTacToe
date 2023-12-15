@@ -34,7 +34,7 @@ public class MainForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newGame.showWindow(true);
-                //jFrame.dispose();
+
 
             }
         });
