@@ -76,6 +76,8 @@ public class TicTacToe implements ActionListener {
                             playerTwoTurn = true;
                             textField.setText(playerTwoSymbol + " turn");
                             checkWinner();
+
+
                         }
                     } else { //Player two pressed
                         if (buttons[i].getText() == "") {
@@ -85,6 +87,8 @@ public class TicTacToe implements ActionListener {
                             playerOneTurn = true;
                             textField.setText(playerOneSymbol + " turn");
                             checkWinner();
+
+
                         }
                     }
                 }
@@ -98,6 +102,7 @@ public class TicTacToe implements ActionListener {
                         buttons[i].setText(playerOneSymbol);
                         textField.setText(playerTwoSymbol + " turn");
                         checkWinner();
+
                     }
                 }
             }
@@ -108,6 +113,7 @@ public class TicTacToe implements ActionListener {
             buttons[index].setText(playerTwoSymbol);
             textField.setText(playerOneSymbol + " turn");
             checkWinner(); // TODO This can bug if player one wins and after bot will place and can also win.
+
         }
 
     }
@@ -199,6 +205,7 @@ public class TicTacToe implements ActionListener {
         ) {
             xWins(2, 4, 6);
         }
+
         //check O win conditions
         if (
                 (buttons[0].getText() == playerTwoSymbol) &&
@@ -255,11 +262,50 @@ public class TicTacToe implements ActionListener {
                         (buttons[6].getText() == playerTwoSymbol)
         ) {
             oWins(2, 4, 6);
+
+        }
+    }
+
+    public void xWins(int a, int b, int c) {
+        setWinningBackground(a, b, c);
+        disableButtons();
+        textField.setText(playerOne.getName() + " wins");
+
+        int option = JOptionPane.showConfirmDialog(frame, "Player One wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            resetGame();
+        } else {
+            frame.dispose();
+        }
+    }
+
+    public void oWins(int a, int b, int c) {
+        setWinningBackground(a, b, c);
+        disableButtons();
+            textField.setText(playerTwo.getName() + " wins");
+
+            int option = JOptionPane.showConfirmDialog(frame, "Player Two wins! Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                resetGame();
+            } else {
+                frame.dispose();
+        }
+    }
+
+    private void setWinningBackground(int a, int b, int c) {
+        buttons[a].setBackground(Color.GREEN);
+        buttons[b].setBackground(Color.GREEN);
+        buttons[c].setBackground(Color.GREEN);
+    }
+
+    private void disableButtons() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setEnabled(false);
         }
     }
 
 
-    public void xWins(int a, int b, int c) {
+   /* public void xWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
         buttons[c].setBackground(Color.GREEN);
@@ -275,16 +321,33 @@ public class TicTacToe implements ActionListener {
         buttons[b].setBackground(Color.GREEN);
         buttons[c].setBackground(Color.GREEN);
 
+
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
         textField.setText(playerOne.getName() + " wins");
+
     }
+*/
 
     public void showWindow(Boolean bool) {
         frame.setVisible(bool);
     }
 
+    public void resetGame() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setText("");
+            buttons[i].setEnabled(true);
+            buttons[i].setBackground(buttonColor);
+        }
+
+
+        playerOneTurn = true;
+        playerTwoTurn = false;
+
+        textField.setText(playerOne.getName() + " turn");
+        resetGame();
+    }
 
     /*
     public static void updateSettings(String playerOneSymbol, String playerTwoSymbol, Color buttonColor) {
